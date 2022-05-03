@@ -1,0 +1,26 @@
+# 配置服务器端口
+server:
+  port: 8080
+# 配置数据源
+spring:
+  datasource:
+    username: root
+    password: 528528
+    url: jdbc:mysql://localhost:3306/webdemo?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+# 配置mybatis-plus
+mybatis-plus:
+  configuration:
+    #打印执行的sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启驼峰映射
+    map-underscore-to-camel-case: true
+    #给pojo类取别名
+  type-aliases-package: com.itheima.pojo
+  global-config:
+    db-config:
+      # 设置实体类所对应的表的统一前缀
+      table-prefix: t_
+      # 设置统一的主键生成策略
+      id-type: auto

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.itheima.pojo.User">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,username,password,
+        remark,email,createTime,
+        updateTime
+    </sql>
+    <insert id="insertUsersAndRoles">
+        insert into t_user_role values
+        <foreach collection="roleIds" item="roleId" separator=",">
+            (#{uid},#{roleId})
+        </foreach>
+    </insert>
+    <delete id="deleteUserAndRoleById">
+        DELETE
+        FROM t_user_role tur
+        WHERE tur.user_id = #{uid}
+    </delete>
+
+
+    <sql id="search">
+        <where>
+            <if test="bean.queryParams.username != null and bean.queryParams.username != ''">
+                username like concat('%',#{bean.queryParams.username},'%')
+            </if>
+        </where>
+    </sql>
+    <resultMap id="UserRoleMap" type="user" autoMapping="true">
+        <!--user的信息-->
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <!--user内部的roles的信息-->
+        <collection property="roles" ofType="role" autoMapping="true">
+            <id column="role_id" property="id"/>
+        </collection>
+    </resultMap>
+    <select id="findUserAndRole" resultMap="UserRoleMap">
+        SELECT *
+        FROM (SELECT * FROM t_user
+        <include refid="search"/> LIMIT #{bean.offset},#{bean.pageSize}
+        ) tu,
+             t_role tr,
+             t_user_role tur
+        WHERE tr.id = tur.role_id
+          and tu.id = tur.user_id order by tu.id
+    </select>
+    <select id="findUserTotal" resultType="java.lang.Long">
+        select count(*) from t_user <include refid="search"/>
+    </select>
+</mapper>

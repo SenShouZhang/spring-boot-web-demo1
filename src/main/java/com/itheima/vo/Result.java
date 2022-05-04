@@ -14,6 +14,10 @@ public class Result implements java.io.Serializable {
     private String message;
     private Object result;
 
+    public Result(String message) {
+        this.message = message;
+    }
+
     public Result(boolean flag, String message) {
         this.flag = flag;
         this.message = message;

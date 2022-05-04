@@ -2,6 +2,7 @@ package com.itheima;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2022/05/02
  */
 @SpringBootApplication
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class SpringBootWebDemoApplication {
 

@@ -30,7 +30,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!--实体类Bean注解开发依赖-->
         <dependency>

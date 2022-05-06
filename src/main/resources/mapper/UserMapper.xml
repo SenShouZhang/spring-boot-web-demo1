@@ -28,8 +28,8 @@
     </insert>
     <delete id="deleteUserAndRoleById">
         DELETE
-        FROM t_user_role tur
-        WHERE tur.user_id = #{uid}
+        FROM t_user_role
+        WHERE t_user_role.user_id = #{uid}
     </delete>
 
 

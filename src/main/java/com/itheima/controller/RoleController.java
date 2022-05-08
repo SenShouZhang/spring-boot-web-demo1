@@ -22,6 +22,6 @@ public class RoleController {
 
     @GetMapping
     public List<Role> query() {
-        return roleService.findAllRoles();
+        return roleService.list(null);
     }
 }

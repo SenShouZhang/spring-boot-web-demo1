@@ -17,15 +17,6 @@ import java.util.List;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role>
         implements RoleService {
-
-    @Autowired
-    @SuppressWarnings("all")
-    private RoleMapper roleMapper;
-
-    @Override
-    public List<Role> findAllRoles() {
-        return roleMapper.selectList(null);
-    }
 }
 
 

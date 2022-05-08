@@ -14,9 +14,4 @@ import java.util.List;
 @Transactional
 @SuppressWarnings("all")
 public interface RoleService extends IService<Role> {
-    /**
-     * 查询所有角色信息
-     * @return {@link List}<{@link Role}>
-     */
-    List<Role> findAllRoles();
 }
